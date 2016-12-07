@@ -1,0 +1,109 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Tic toc Toe Game</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/simple-sidebar.css" rel="stylesheet">
+  <!-- custom js -->
+    <script type="text/javascript" src="js/angular.min.js"></script>
+    <script type="text/javascript" src="js/webel1.js"></script>
+    <script type="text/javascript" src="js/webel2.js"></script>
+    <script type="text/javascript" src="js/webel4.js"></script>
+    <script type="text/javascript" src="js/socket.io.js"></script>
+</head>
+
+<body>
+    <style>
+    .cell {
+        width: 100px;
+        height: 100px;
+        font: 90px sans-serif;
+        text-align: center;
+        vertical-align: center;
+        color: #fff;
+    }
+
+    </style>
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="#">
+                        Tic Toc Game
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-link active"> Tic Toc Game in Angular </a>
+                </li>
+                <li>
+                    <a href="index1.html"> Tic Toc Game in HTML 5</a>
+                </li>
+                
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+                    <div class="col-lg-12">
+                        <div class="col-lg-2">
+                        </div>
+                        <div class="col-lg-8">
+                            <div ng-app="tictactoe" ng-controller="Game">
+                                <p>You are:
+                                    <label>
+                                        <input type="radio" value="O" ng-model="player" /><strong>O</strong>
+                                    </label>
+                                    <label>
+                                        <input type="radio" value="X" ng-model="player" value="Clear Board" /><strong>X</strong>
+                                    </label>
+                                </p>
+                                <div ng-show="$ynchronized">
+                                    <h2 ng-show="currentPlayer == player">Your Turn</h2>
+                                    <h2 ng-show="currentPlayer != player">Waiting for Opponent</h2>
+                                    <h2 ng-show="winner">WINNER IS  -->>&nbsp;{{winner}}!! <input type="button" ng-click="newGame()" value="New Game" class="btn btn-default"/></h2>
+                                    <table border="1">
+                                        <tr ng-repeat="row in [0,1,2]">
+                                            <td ng-repeat="column in [0,1,2]" ng-click="cellClick(row,column)" ng-class="cellClass(row,column)">{{cellText(row,column)}}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div ng-hide="$ynchronized">
+                                    <h2>Synchronizing with Tic Toc  Server.....</h2>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-2">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- Menu Toggle Script -->
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    </script>
+</body>
+
+</html>
